@@ -49,7 +49,7 @@ const HomePage = () => {
         dispatch(setSelectedCadidateDetails(item));
 
         history(`/${item.id}`);
-        // window.open(`/${item.id}`, "_blank");
+
 
     }
     const setShortListedcandidateListFunc = () => {
