@@ -1,24 +1,39 @@
-import logo from './logo.svg';
-import './App.css';
 
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
+import {
+  HomePage,
+  CadidateDetailsPage,
+  ShortListPage,
+  RejectionListPage
+} from './pages';
+import './App.css';
+import { Provider } from 'react-redux';
+import rootReducer from './redux/reducer';
+import { configureStore } from '@reduxjs/toolkit';
+
+const store = configureStore({
+  reducer: rootReducer,
+});
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+
+    <Router>
+      <Provider store={store}>
+        <div>
+          <Routes>
+            <Route exact path="/" element={<HomePage />} />
+            <Route path="/:id" element={<CadidateDetailsPage />} />
+            <Route path="/shortlist" element={<ShortListPage />} />
+            <Route path="/rejection" element={<RejectionListPage />} />
+            {/* <Route exact path="/login" element={<Login/>}/>
+        <Route exact path="/recovery-password" element={<RecoveryPassword/>}/>
+        <Route path="*" element={<NotFound/>}/> */}
+          </Routes>
+        </div>
+      </Provider>
+    </Router>
+
+
   );
 }
 
